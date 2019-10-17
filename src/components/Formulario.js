@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const Formulario = () => {
+const Formulario = ({datosConsulta}) => {
 
   /*
     State del componente con Hooks
@@ -17,12 +17,16 @@ const Formulario = () => {
     guardarBusqueda({
       ...busqueda, [e.target.name]: e.target.value
     });
-    
+  }
 
+  const consultarClima = e =>{
+    e.preventDefault();
+    //Pasar hacia el componente principal la busqueda
+    datosConsulta(busqueda);
   }
 
   return ( 
-    <form>
+    <form onSubmit={consultarClima}>
       <div className="input-field col s12">
         <input type="text"
           name="ciudad"
@@ -34,6 +38,7 @@ const Formulario = () => {
       <div className="input-field col s12">
         <select name="pais" onChange={handleChange}>
           <option value="">Selecciona un pais</option>
+          <option value="BO">Bolivia</option>
           <option value="US">Estados Unidos</option>
           <option value="MX">Mexico</option>
           <option value="AR">Argentina</option>
